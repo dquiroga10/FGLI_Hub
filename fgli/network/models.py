@@ -16,3 +16,11 @@ class Answer(models.Model):
 
 	def __str__(self):
 		return f"question id: {question.id} answer: {self.answer}"
+
+class Blog_Post(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog', null=True)
+    name = models.CharField(max_length=100)
+    text = models.CharField(max_length=10000)
+
+    def __str__(self):
+        return f"blog: {self.name}"
