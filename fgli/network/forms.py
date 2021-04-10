@@ -52,7 +52,7 @@ class MentorApp(forms.Form):
 	submission_date = forms.DateTimeField()
 	email = forms.CharField(max_length=100)
 	employer = forms.CharField(max_length=100)
-	portfolio = forms.CharField(max_length=150)
+	website = forms.CharField(max_length=150)
 	linkedin = forms.CharField(max_length=100)
 	answer1 = forms.CharField(max_length=1000)	# Why do you want to be a mentor
 	answer2 = forms.CharField(max_length=1000)	# What are your interests and passion projects
@@ -77,12 +77,12 @@ class MentorApp(forms.Form):
 			return False
 		return True
 
-	def save(self, commit=True, user=0):
-		current_user = UserRoles.objects.get(user=user.id)
-		current_user.professional = True
-		current_user.save()
-		messages.info("User is now a proessional")
-		return current_user
+	# def save(self, commit=True, user=0):
+	# 	current_user = UserRoles.objects.get(user=user.id)
+	# 	current_user.professional = True
+	# 	current_user.save()
+	# 	messages.info("User is now a proessional")
+	# 	return current_user
 
 
 class NewUserForm(UserCreationForm):

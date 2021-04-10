@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Question, Answer, UserRoles
+from .models import Question, Answer, UserRoles, MentorApplication
 from django.contrib.auth.forms import  AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages 
@@ -56,7 +56,7 @@ def register(request):
 			ur = UserRoles()
 			ur.save()
 			user.myrole.add(ur)
-			messages.info(request, f"User Is Professional: {user.myrole.all()}")
+			# messages.info(request, f"User Is Professional: {user.myrole.all()}")
 			login(request, user)
 			return redirect('/network/')
 		else:
@@ -72,7 +72,7 @@ def register(request):
 def mentorapp(request):
 	if request.method == 'POST':
 		form = MentorApp(request.POST)
-		if form.is_valid():
+		if form.is_valid(request):
 			# username = form.cleaned_data.get('username')
 			# password = form.cleaned_data.get('password')
 			# user = authenticate(username=username, password=password)
@@ -80,12 +80,36 @@ def mentorapp(request):
 			# 	login(request, user)
 			# 	messages.info(request, f"You are now logged in as {username}")
 			# 	messages.info(request, f"{user.email}")
-			form.save()
+			# form.save()
+			print(request.user)
+			current_user = UserRoles.objects.get(user=request.user)
+			new_application =  MentorApplication()
+			new_application.user = current_user
+			new_application.employer = form.cleaned_data['employer']
+			new_application.website = form.cleaned_data['website']
+			new_application.linkedin = form.cleaned_data['linkedin']
+			new_application.a1 = form.cleaned_data['answer1']
+			new_application.a2 = form.cleaned_data['answer2']
+
+			
+			current_user.professional = True
+			current_user.employer = form.cleaned_data['employer']
+			current_user.website = form.cleaned_data['website']
+			current_user.linkedin = form.cleaned_data['linkedin']
+			current_user.a1 = form.cleaned_data['answer1']
+			current_user.a2 = form.cleaned_data['answer2']
+			
+			messages.info(request,f"User is now a proessional")
+			
+			current_user.save()
+			new_application.save()
+			current_user.apps.add(new_application)
+
 			return redirect('/network/')
 			# else:
 			# 	messages.error(request, "Invalid username or password")
 		else:
-			messages.error(request, "Invalid username or password")
+			messages.error(request, "Could not submit application")
 	form = MentorApp()
 	return render(request, 'network/mentorapp.html',{'form': form})
 
