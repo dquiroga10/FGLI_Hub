@@ -6,7 +6,7 @@ class Question(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='questions', null=True)
     title = models.CharField(max_length=100, null=True)
     category = models.CharField(max_length=50, null=True)
-    question = models.CharField(max_length=10000)
+    question = models.CharField(max_length=10000, null=False, default="Sample question")
     datetime = models.DateTimeField(auto_now=True)
     answers_tot = models.IntegerField(default=0)
     

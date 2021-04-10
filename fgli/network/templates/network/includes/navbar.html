@@ -1,5 +1,7 @@
+{% load tt %}
+
 <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #101D42">
-  <a class="navbar-brand text-white" href="/network/">Recourse!</a>
+  <a class="navbar-brand text-white" href="/network/">1st Gens @ W&M</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -7,7 +9,6 @@
 
     <form class="form-inline my-2 my-lg-0" >
       <input class="form-control mr-sm-2" type="search" placeholder="Search Answers" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
 
     <ul class="navbar-nav ml-2">
@@ -26,8 +27,11 @@
     </ul>
 
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <div class="nav-link text-white" href="#">There are currently 8 other FGLI members registered</div>
+      <li class="nav-item mr-2">
+        <a class="btn btn-success" role="button" href="/network/newquestion">Ask a Question</a>
+      </li>
+      <li class="nav-item ml-2">
+        <div class="nav-link text-white" href="#">There are currently {{ all_questions|usercount }} other FGLI members registered</div>
       </li>
     </ul>
 

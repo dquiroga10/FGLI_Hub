@@ -1,12 +1,15 @@
 {% extends "network/basic.html" %}
 
 {% block content %}
+
 	<form method='POST'>
 		{% csrf_token %}
+		<div class="container">
 
-		{{form.as_p}}
+			{{form.as_p}}
 
-		<button class ='btn' type='submit'>submit</button>
+			<button class ='btn btn-primary' type='submit'>Submit</button>
+		</div>
 	</form>
 	
 
