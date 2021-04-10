@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #115740">
-  <a class="navbar-brand text-white" href="/">Recourse!</a>
+  <a class="navbar-brand text-white" href="/network/">Recourse!</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -7,14 +7,14 @@
     <ul class="navbar-nav">
       {% if user.is_authenticated %}
         <li class="nav-item">
-          <a class="nav-link text-white" href="/accounts/logout">Logout</a>
+          <a class="nav-link text-white" href="/network/logout/">Logout</a>
         </li>
       {% else %}
       	<li class="nav-item">
-    			<a class="nav-link text-white" href="/register">Register</a>
+    			<a class="nav-link text-white" href="/network/register/">Register</a>
     		</li>
     		<li class="nav-item">
-    			<a class="nav-link text-white" href="/login">Login</a>
+    			<a class="nav-link text-white" href="/network/login/">Login</a>
     		</li>
       {% endif %}
     </ul>
