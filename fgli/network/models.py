@@ -2,6 +2,18 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
+class MentorApplication(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='apps')
+    submission_date = models.DateTimeField(auto_now=True)
+    employer = models.CharField(max_length=50)
+    website = models.CharField(max_length=100)
+    linkedin = models.CharField(max_length=100)
+    a1 = models.CharField(max_length=1000) # Why do you want to be a mentor
+    a2 = models.CharField(max_length=1000) # What are your interests and passion projects
+
+    def __str__(self):
+        return f"User: {self.user} SubDate: {self.submission_date}"
+
 class Question(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='questions', null=True)
     title = models.CharField(max_length=100, null=True)
@@ -33,6 +45,13 @@ class Blog_Post(models.Model):
 class UserRoles(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='myrole', null=True)
     professional = models.BooleanField(default=False)
+    fgli = models.BooleanField(default=False)
+
+    employer = models.CharField(max_length=50)
+    website = models.CharField(max_length=100)
+    linkedin = models.CharField(max_length=100)
+    a1 = models.CharField(max_length=1000) # Why do you want to be a mentor
+    a2 = models.CharField(max_length=1000) # What are your interests and passion projects
 
     def __str__(self):
         return f"role: {self.professional}" 

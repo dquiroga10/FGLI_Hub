@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Question, Answer, UserRoles
+from .models import Question, Answer, UserRoles, MentorApplication
 from django.contrib.auth.forms import  AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages 
@@ -80,12 +80,25 @@ def mentorapp(request):
 			# 	login(request, user)
 			# 	messages.info(request, f"You are now logged in as {username}")
 			# 	messages.info(request, f"{user.email}")
-			form.save()
+			# form.save()
+
+			current_user = request.user
+			new_application =  MentorApplication()
+			new_application.user = current_user
+			new_application.employer = form.cleaned_data['employer']
+			new_application.website = form.cleaned_data['website']
+			new_application.linkedin = form.cleaned_data['linkedin']
+			new_application.a1 = form.cleaned_data['answer1']
+			new_application.a2 = form.cleaned_data['answer2']
+
+			new_application.save()
+			current_user.apps.add(new_application)
+
 			return redirect('/network/')
 			# else:
 			# 	messages.error(request, "Invalid username or password")
 		else:
-			messages.error(request, "Invalid username or password")
+			messages.error(request, "Could not submit application")
 	form = MentorApp()
 	return render(request, 'network/mentorapp.html',{'form': form})
 
