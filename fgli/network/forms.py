@@ -4,6 +4,49 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import User
 from django.contrib import messages 
 from django.utils.safestring import mark_safe
+from .models import Question, Answer, UserRoles
+
+
+class QuestionForm(forms.Form):
+
+	topic = forms.CharField(max_length=50)
+
+	body = forms.CharField(max_length=1000)
+
+	class Meta:
+
+		model = Question
+
+		fields = ['topic', 'body']
+
+
+	def is_valid(self, request):
+		
+		valid = super(Question, self).is_valid()
+
+		if not valid:
+			return valid
+
+		return True 
+
+class AnswerForm(forms.Form):
+
+	body = forms.CharField(max_length=1000)
+
+	class Meta:
+
+		model = Answer
+
+		fields = ['body']
+
+	def is_valid(self, request):
+		valid = super(Answer, self).is_valid()
+
+		if not valid:
+			return valid
+
+		return True
+
 
 class MentorApp(forms.Form):
 	submission_date = forms.DateTimeField()
