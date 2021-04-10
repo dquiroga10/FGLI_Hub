@@ -125,6 +125,8 @@ def create_answer(request, q_id):
 			current_question.answers.add(new_answer)
 			current_question.answers_tot += 1
 			current_user.answers.add(new_answer)
+
+			current_question.save()
 			return redirect(f'/network/{q_id}/')
 		else:
 			messages.error(request, "Error creating answer")
@@ -132,5 +134,6 @@ def create_answer(request, q_id):
 	return render(request,'network/newanswer.html',{'form':form})
 
 def specific_question(request, q_id):
+	answers = Answer.objects.filter(question = q_id)
 
-	return render(request, 'network/question.html', {'question':Question.objects.get(id=q_id)})
+	return render(request, 'network/question.html', {'question':Question.objects.get(id=q_id), 'answers': answers})

@@ -1,6 +1,8 @@
 {% extends "network/basic.html" %}
 
+
 {% block content %}
+
 	<div style="min-height: 100%; position: relative;">
 		<div class="col-md-8" style="position: absolute; top: 0; bottom: 0; left: 4%;">
 			<section>
@@ -26,6 +28,12 @@
 									<small>Access recipes for success at W&M</small>
 								</div>
 							</a>
+							<a class="list-group-item list-group-item-action" href="#">
+								<div class="justify-content-between">
+									<h5 class="mb-1">Network</h5>
+									<small>Expand your network by connecting with W&M graduates and professionals</small>
+								</div>
+							</a>
 					</div>
 				</div>
 			</section>
@@ -43,21 +51,13 @@
 						</tr>
 					</thead>
 					<tbody>
+						{% for question in all_questions %}
 						<tr>
-							<th scope="row">When should I start applying to internships?</th>
-							<td>7</td>
-							<td>Apr 2021</td>
+							<th scope="row"><a href="/network/{{ question.id }}">{{ question.title }}</a></th>
+							<td>{{ question.answers_tot }}</td>
+							<td>{{ question.datetime }}</td>
 						</tr>
-						<tr>
-							<th scope="row">How do I declare my major?</th>
-							<td>11</td>
-							<td>Mar 2021</td>
-						</tr>
-						<tr>
-							<th scope="row">How do I contact my major advisor?</th>
-							<td>4</td>
-							<td>Jan 2021</td>
-						</tr>
+						{% endfor %}
 					</tbody>
 				</table>
 			</section>
