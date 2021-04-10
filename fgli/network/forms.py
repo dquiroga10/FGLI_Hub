@@ -5,6 +5,18 @@ from django.contrib.auth.forms import User
 from django.contrib import messages 
 from django.utils.safestring import mark_safe
 
+class AnswerForm(forms.Form):
+	answer = forms.CharField(max_length=1000)
+
+	def is_valid(self, request):
+		valid = super(AnswerForm, self).is_valid()
+
+		if not request.user.is_authenticated:
+			messages.error(request, "Please create an account or log in")
+			return False
+
+		return True
+
 class QuestionForm(forms.Form):
 	title = forms.CharField(max_length=100)
 	question = forms.CharField(max_length=10000)
