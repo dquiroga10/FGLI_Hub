@@ -8,6 +8,7 @@ from .forms import NewUserForm
 from django.views.decorators.csrf import csrf_protect
 from datetime import datetime
 from django.utils.safestring import mark_safe
+from django.contrib.auth.models import User
 
 
 # Create your views here.
@@ -67,3 +68,8 @@ def register(request):
 	return render(request,
 				  'network/register.html',
 				   context={'form':form})
+
+def mentorapp(request):
+	all_questions = User.objects.filter()
+	context = {'all_questions': all_questions}
+	return render(request, 'network/mentorapp.html',context)
