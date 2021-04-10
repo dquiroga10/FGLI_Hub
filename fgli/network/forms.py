@@ -14,6 +14,10 @@ class MentorApp(forms.Form):
 	answer1 = forms.CharField(max_length=1000)	# Why do you want to be a mentor
 	answer2 = forms.CharField(max_length=1000)	# What are your interests and passion projects
 
+	class Meta:
+
+		fields = ['submission_date', 'email', 'employer', 'portfolio', 'linkedin', 'answer1', 'answer2']
+
 	def is_valid(self, request):
 		valid = super(MentorApp, self).is_valid()
 		if not valid:
@@ -22,6 +26,7 @@ class MentorApp(forms.Form):
 		formemail = self.cleaned_data['email']
 		user = User.objects.filter(email=formemail)
 		if not user:
+			messages.error(request, "Please use an email that corresponds to an account")
 			return False
 		role = UserRoles.objects.get(user=user[0].id)
 		if role.professional:
@@ -33,6 +38,7 @@ class MentorApp(forms.Form):
 		curuser = UserRoles.objects.get(user=user.id)
 		curuser.professional = True
 		curuser.save()
+		messages.info("User is now a proessional")
 		return curuser
 
 
