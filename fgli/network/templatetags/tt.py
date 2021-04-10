@@ -24,3 +24,9 @@ def proessional(req):
     ct = UserRoles.objects.filter(professional=True)
     return ct
 
+@register.filter(name='questions')
+def questions(req):
+	qs = Question.objects.filter()
+	print(qs)
+	return qs
+

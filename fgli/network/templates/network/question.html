@@ -1,14 +1,35 @@
 {% extends "network/basic.html" %}
 
 {% block content %}
+	
+	<div class="container">
+		<div class="card">
+			<div class="card-header">
+				<span>{{ question.user }}</span>
+				<small class="ml-3 float-right">Asked on {{ question.datetime }}</small>
+				<span class="badge badge-primary float-right">{{ question.category }}</span>
+			</div>
+			<div class="card-body">
+				<h3 class="card-title">{{ question.title }}</h3>
+				<p>{{ question.question }}</p>
+			</div>
+		</div>
 
-	{{question.user}}
-	{{question.title}}
-	{{question.category}}
-	{{question.quesiton}}
-	{{question.datetime}}
-	{{question.answers_tot}}
+		{% if answers %}
+			<h3 class="mt-3 mb-3">Answers</h3>
+		{% endif %}
+		{% for answer in answers %}
+		<div class="card mt-2">
+			<div class="card-header">
+				<span><b>{{ question.user }}</b></span>
+				<small class="ml-3 float-right">Answered on {{ answer.datetime }}</small>
+				<p>{{ answer.answer }}</p>
+			</div>
+		</div>
+		{% endfor %}
 
-	<button><a href="{% url 'answers' q_id=question.id %}">answer</a></button>
+		<a class="btn btn-primary mt-2" role="button" href="{% url 'answers' q_id=question.id %}">Answer</a>
+
+	</div>
 
 {% endblock %}
