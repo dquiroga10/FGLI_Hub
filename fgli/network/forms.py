@@ -77,12 +77,12 @@ class MentorApp(forms.Form):
 			return False
 		return True
 
-	def save(self, commit=True, user=0):
-		current_user = UserRoles.objects.get(user=user.id)
-		current_user.professional = True
-		current_user.save()
-		messages.info("User is now a proessional")
-		return current_user
+	# def save(self, commit=True, user=0):
+	# 	current_user = UserRoles.objects.get(user=user.id)
+	# 	current_user.professional = True
+	# 	current_user.save()
+	# 	messages.info("User is now a proessional")
+	# 	return current_user
 
 
 class NewUserForm(UserCreationForm):
