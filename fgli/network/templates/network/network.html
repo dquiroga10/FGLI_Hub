@@ -1,5 +1,68 @@
 {% extends "network/basic.html" %}
 
 {% block content %}
-	start working here
+	<div style="min-height: 100%; position: relative;">
+		<div class="col-md-8" style="position: absolute; top: 0; bottom: 0; left: 4%;">
+			<section>
+				<div class="row">
+					<div class="col-md-3">
+						<h2>Resources</h2>
+						<div class="list-group">
+							<a class="list-group-item list-group-item-action" href="#">
+								<div class="justify-content-between">
+									<h5 class="mb-1">Sample Schedules</h5>
+									<small>View previous schedules of successful graduates</small>
+								</div>
+							</a>
+							<a class="list-group-item list-group-item-action" href="#">
+								<div class="justify-content-between">
+									<h5 class="mb-1">Wellness Center</h5>
+									<small>See mental health recources</small>
+								</div>
+							</a>
+							<a class="list-group-item list-group-item-action" href="#">
+								<div class="justify-content-between">
+									<h5 class="mb-1">How-To's</h5>
+									<small>Access recipes for success at W&M</small>
+								</div>
+							</a>
+					</div>
+				</div>
+			</section>
+		</div>
+
+		<div class="col-md-8" style="position: absolute; top: 0; bottom: 0; left: 25%">
+			<section>
+				<h1>Discover Questions</h1>
+				<table class="table table-hover table-light">
+					<thead>
+						<tr>
+							<th scope="col">Question</th>
+							<th scope="col">Answers</th>
+							<th scope="col">Date Posted</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="row">When should I start applying to internships?</th>
+							<td>7</td>
+							<td>Apr 2021</td>
+						</tr>
+						<tr>
+							<th scope="row">How do I declare my major?</th>
+							<td>11</td>
+							<td>Mar 2021</td>
+						</tr>
+						<tr>
+							<th scope="row">How do I contact my major advisor?</th>
+							<td>4</td>
+							<td>Jan 2021</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+		</div>
+	</div>
+
+
 {% endblock %}

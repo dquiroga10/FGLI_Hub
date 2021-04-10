@@ -1,9 +1,9 @@
 <head>
 	{% load static %}
 
-	<link rel="stylesheet" type="text/css" href="{% static 'network/style.css' %}">
-
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'network/style.css' %}">
 
 	<!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -21,7 +21,7 @@
 
 	{% include "network/includes/messages.html" %}
 
-	<div class='container' id="visiblepage" style="margin-bottom: 15%">
+	<div class='' id="visiblepage" style="margin-bottom: 15%">
 		<br>
 		{% block content %}
 		{% endblock %}
