@@ -5,6 +5,49 @@ from django.contrib.auth.forms import User
 from django.contrib import messages 
 from django.utils.safestring import mark_safe
 
+class AnswerForm(forms.Form):
+	answer = forms.CharField(max_length=1000)
+
+	def is_valid(self, request):
+		valid = super(AnswerForm, self).is_valid()
+
+		if not request.user.is_authenticated:
+			messages.error(request, "Please create an account or log in")
+			return False
+
+		return True
+
+class QuestionForm(forms.Form):
+	title = forms.CharField(max_length=100)
+	question = forms.CharField(max_length=10000)
+	category = forms.CharField(max_length=50)
+
+	def is_valid(self, request):
+		valid = super(QuestionForm, self).is_valid()
+
+
+		if not request.user.is_authenticated:
+			messages.error(request, "Please create an account or log in")
+			return False
+
+		# valid = super(QuestionForm, self).is_valid()
+		# if not valid:
+		# 	return valid
+		return True
+
+	# def save(self, request, commit=True):
+	# 	current_user = request.user
+	# 	new_question = Question()
+	# 	new_question.user = current_user
+	# 	new_question.title = self.cleaned_data['title']
+	# 	new_question.question = self.cleaned_data['question']
+	# 	new_question.category = self.cleaned_data['category']
+	# 	if commit:
+	# 		new_question.save()
+	# 		current_user.questions.add(new_question)
+	# 	return new_question
+		
+
 class MentorApp(forms.Form):
 	submission_date = forms.DateTimeField()
 	email = forms.CharField(max_length=100)
@@ -35,11 +78,11 @@ class MentorApp(forms.Form):
 		return True
 
 	def save(self, commit=True, user=0):
-		curuser = UserRoles.objects.get(user=user.id)
-		curuser.professional = True
-		curuser.save()
+		current_user = UserRoles.objects.get(user=user.id)
+		current_user.professional = True
+		current_user.save()
 		messages.info("User is now a proessional")
-		return curuser
+		return current_user
 
 
 class NewUserForm(UserCreationForm):

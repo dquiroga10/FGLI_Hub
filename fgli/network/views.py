@@ -4,7 +4,7 @@ from .models import Question, Answer, UserRoles
 from django.contrib.auth.forms import  AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages 
-from .forms import NewUserForm, MentorApp
+from .forms import NewUserForm, MentorApp, QuestionForm, AnswerForm
 from django.views.decorators.csrf import csrf_protect
 from datetime import datetime
 from django.utils.safestring import mark_safe
@@ -71,7 +71,7 @@ def register(request):
 
 def mentorapp(request):
 	if request.method == 'POST':
-		form = MentorApp(request)
+		form = MentorApp(request.POST)
 		if form.is_valid():
 			# username = form.cleaned_data.get('username')
 			# password = form.cleaned_data.get('password')
@@ -88,3 +88,45 @@ def mentorapp(request):
 			messages.error(request, "Invalid username or password")
 	form = MentorApp()
 	return render(request, 'network/mentorapp.html',{'form': form})
+
+def create_question(request):
+	if request.method == 'POST':
+		form = QuestionForm(request.POST)
+		if form.is_valid(request):
+
+			current_user = request.user
+			new_question = Question()
+			new_question.user = current_user
+			new_question.title = form.cleaned_data['title']
+			new_question.question = form.cleaned_data['question']
+			new_question.category = form.cleaned_data['category']
+			
+			new_question.save()
+			current_user.questions.add(new_question)
+			#form.save(request)
+			return redirect('/network/')
+		else:
+			messages.error(request, "Error creating question")
+	form = QuestionForm
+	return render(request, 'network/newquestion.html',{'form': form})
+
+def create_answer(request, q_id):
+	if request.method == 'POST':
+		form = AnswerForm(request.POST)
+		if form.is_valid(request):
+			current_user = request.user
+			current_question = Question.objects.get(id=q_id)
+			new_answer = Answer()
+			new_answer.user = current_user
+			new_answer.answer = form.cleaned_data['answer']
+			new_answer.question = current_question
+
+			new_answer.save()
+			current_question.answers.add(new_answer)
+			current_question.answers_tot += 1
+			current_user.answers.add(new_answer)
+			return redirect(f'/network/{q_id}/')
+		else:
+			messages.error(request, "Error creating answer")
+	form = AnswerForm()
+	return render(request,'network/newanswer.html',{'form':form})

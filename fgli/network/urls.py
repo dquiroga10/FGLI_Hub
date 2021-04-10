@@ -8,4 +8,6 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('logout/', views.logout_request, name='logout'),
     path('mentorapp/', views.mentorapp, name='mentorapp'),
+    path('newquestion/', views.create_question, name='questions'),
+    path('<int:q_id>/newanswer/', views.create_answer, name='answers'),
 ]
