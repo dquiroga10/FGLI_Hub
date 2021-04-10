@@ -4,7 +4,7 @@ from .models import Question, Answer, UserRoles
 from django.contrib.auth.forms import  AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages 
-from .forms import NewUserForm
+from .forms import NewUserForm, MentorApp
 from django.views.decorators.csrf import csrf_protect
 from datetime import datetime
 from django.utils.safestring import mark_safe
@@ -70,6 +70,21 @@ def register(request):
 				   context={'form':form})
 
 def mentorapp(request):
-	all_questions = User.objects.filter()
-	context = {'all_questions': all_questions}
-	return render(request, 'network/mentorapp.html',context)
+	if request.method == 'POST':
+		form = MentorApp(request)
+		if form.is_valid():
+			# username = form.cleaned_data.get('username')
+			# password = form.cleaned_data.get('password')
+			# user = authenticate(username=username, password=password)
+			# if user is not None:
+			# 	login(request, user)
+			# 	messages.info(request, f"You are now logged in as {username}")
+			# 	messages.info(request, f"{user.email}")
+			form.save()
+			return redirect('/network/')
+			# else:
+			# 	messages.error(request, "Invalid username or password")
+		else:
+			messages.error(request, "Invalid username or password")
+	form = MentorApp()
+	return render(request, 'network/mentorapp.html',{'form': form})
