@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Question, Answer
+from .models import Question, Answer, UserRoles
 from django.contrib.auth.forms import  AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages 
@@ -52,6 +52,10 @@ def register(request):
 			user = form.save()
 			username = form.cleaned_data.get("username")
 			messages.success(request, f"New Account Created: {username}")
+			ur = UserRoles()
+			ur.save()
+			user.myrole.add(ur)
+			messages.info(request, f"User Is Professional: {user.myrole.all()}")
 			login(request, user)
 			return redirect('/network/')
 		else:

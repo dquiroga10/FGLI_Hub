@@ -24,3 +24,10 @@ class Blog_Post(models.Model):
 
     def __str__(self):
         return f"blog: {self.name}"
+
+class UserRoles(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='myrole', null=True)
+    professional = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"role: {self.professional}" 
