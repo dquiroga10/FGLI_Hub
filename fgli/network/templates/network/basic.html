@@ -1,7 +1,7 @@
 <head>
 	{% load static %}
 
-	<link rel="stylesheet" type="text/css" href="{% static 'recourse_app/style.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'network/style.css' %}">
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -15,7 +15,8 @@
 </head>
 
 
-<body>
+<body
+	style="background-color: #DDDBCB">
 	{% include "network/includes/navbar.html" %}
 
 	{% include "network/includes/messages.html" %}
@@ -27,6 +28,6 @@
 	</div>
 </body>
 
-<footer id="sticky-footer" class="py-4 text-white navbar fixed-bottom" style="background-color: #115740">
+<footer id="sticky-footer" class="py-4 text-white navbar fixed-bottom" style="background-color: #101D42">
   {% include "network/includes/footer.html" %}
 </footer>
