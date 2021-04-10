@@ -130,3 +130,7 @@ def create_answer(request, q_id):
 			messages.error(request, "Error creating answer")
 	form = AnswerForm()
 	return render(request,'network/newanswer.html',{'form':form})
+
+def specific_question(request, q_id):
+
+	return render(request, 'network/question.html', {'question':Question.objects.get(id=q_id)})

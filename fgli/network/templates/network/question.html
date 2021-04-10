@@ -1,0 +1,14 @@
+{% extends "network/basic.html" %}
+
+{% block content %}
+
+	{{question.user}}
+	{{question.title}}
+	{{question.category}}
+	{{question.quesiton}}
+	{{question.datetime}}
+	{{question.answers_tot}}
+
+	<button><a href="{% url 'answers' q_id=question.id %}">answer</a></button>
+
+{% endblock %}

@@ -10,4 +10,5 @@ urlpatterns = [
     path('mentorapp/', views.mentorapp, name='mentorapp'),
     path('newquestion/', views.create_question, name='questions'),
     path('<int:q_id>/newanswer/', views.create_answer, name='answers'),
+    path('<int:q_id>/', views.specific_question, name="spec_question"),
 ]
