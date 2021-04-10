@@ -10,13 +10,10 @@ class QuestionForm(forms.Form):
 	question = forms.CharField(max_length=10000)
 	category = forms.CharField(max_length=50)
 
-	class Meta:
-
-		model = Question()
-
-		fields = ['title', 'question', 'category']
-
 	def is_valid(self, request):
+		valid = super(QuestionForm, self).is_valid()
+
+
 		if not request.user.is_authenticated:
 			messages.error(request, "Please create an account or log in")
 			return False
@@ -26,17 +23,17 @@ class QuestionForm(forms.Form):
 		# 	return valid
 		return True
 
-	def save(self, request, commit=True):
-		current_user = request.user
-		new_question = Question()
-		new_question.user = current_user
-		new_question.title = self.cleaned_data['title']
-		new_question.question = self.cleaned_data['question']
-		new_question.category = self.cleaned_data['category']
-		if commit:
-			new_question.save()
-			current_user.questions.add(new_question)
-		return new_question
+	# def save(self, request, commit=True):
+	# 	current_user = request.user
+	# 	new_question = Question()
+	# 	new_question.user = current_user
+	# 	new_question.title = self.cleaned_data['title']
+	# 	new_question.question = self.cleaned_data['question']
+	# 	new_question.category = self.cleaned_data['category']
+	# 	if commit:
+	# 		new_question.save()
+	# 		current_user.questions.add(new_question)
+	# 	return new_question
 		
 
 class MentorApp(forms.Form):

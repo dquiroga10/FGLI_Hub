@@ -71,7 +71,7 @@ def register(request):
 
 def mentorapp(request):
 	if request.method == 'POST':
-		form = MentorApp(request)
+		form = MentorApp(request.POST)
 		if form.is_valid():
 			# username = form.cleaned_data.get('username')
 			# password = form.cleaned_data.get('password')
@@ -91,11 +91,21 @@ def mentorapp(request):
 
 def create_question(request):
 	if request.method == 'POST':
-		form = QuestionForm(request)
+		form = QuestionForm(request.POST)
 		if form.is_valid(request):
-			form.save(request)
+
+			current_user = request.user
+			new_question = Question()
+			new_question.user = current_user
+			new_question.title = form.cleaned_data['title']
+			new_question.question = form.cleaned_data['question']
+			new_question.category = form.cleaned_data['category']
+			
+			new_question.save()
+			current_user.questions.add(new_question)
+			#form.save(request)
 			return redirect('/network/')
 		else:
 			messages.error(request, "Error creating question")
-	form = QuestionForm()
+	form = QuestionForm
 	return render(request, 'network/newquestion.html',{'form': form})
