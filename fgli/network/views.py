@@ -14,7 +14,7 @@ from django.contrib.auth.models import User
 # Create your views here.
 
 def network(request):
-	all_questions = Question.objects.filter()
+	all_questions = Question.objects.filter().order_by('-answers_tot')
 	context = {'all_questions': all_questions}
 	return render(request, 'network/network.html',context)
 
