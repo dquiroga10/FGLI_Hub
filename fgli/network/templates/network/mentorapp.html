@@ -2,12 +2,14 @@
 
 {% block content %}
 	<form method='POST'>
-		{% csrf_token %}
+		<div class="container">
+			{% csrf_token %}
 		
 
-		{{form.as_p}}
+			{{form.as_p}}
 
-		<button class ='btn' type='submit'>submit</button>
+			<button class ='btn' type='submit'>submit</button>
+		</div>
 	</form>
 	
 
