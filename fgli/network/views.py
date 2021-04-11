@@ -64,12 +64,15 @@ def register(request):
 				messages.error(request, f"{msg}: {form.error_messages[msg]}")
 
 	form = NewUserForm
-	messages.info(request, f"Bryan is so cute")
+	messages.info(request, f"Hi Peter :)")
 	return render(request,
 				  'network/register.html',
 				   context={'form':form})
 
 def mentorapp(request):
+	if str(request.user) == 'AnonymousUser':
+		messages.info(request, "Please log in to apply to become a mentor.")
+		return redirect('/network/login/')
 	if request.method == 'POST':
 		form = MentorApp(request.POST)
 		if form.is_valid(request):
@@ -114,6 +117,9 @@ def mentorapp(request):
 	return render(request, 'network/mentorapp.html',{'form': form})
 
 def create_question(request):
+	if str(request.user) == 'AnonymousUser':
+		messages.info(request, "Please log in to ask a question.")
+		return redirect('/network/login/')
 	if request.method == 'POST':
 		form = QuestionForm(request.POST)
 		if form.is_valid(request):
