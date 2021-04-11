@@ -2,6 +2,7 @@
 
 
 {% block content %}
+{% load static %}
 
 	<div style="min-height: 100%; position: relative;">
 		<div class="col-md-8" style="position: absolute; top: 0; bottom: 0; left: 4%;">
@@ -64,12 +65,12 @@
 		</div>
 	</div>
 
-	<div style="position: fixed; bottom: 12%; width: 100%;">
+	<div style="width: 100%;">
 		<div class="container" style="margin: 0 auto">
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col">
 					<div class="card" style="width: 18rem;">
-						<img class="card-img-top" src="...">
+						<img class="card-img-top" src="{% static 'network/images/_QuirogaD.png' %}">
 						<div class="card-body">
 							<h5 class="card-title">Card Title</h5>
 							<p class="card-text">Uhhh</p>
@@ -77,9 +78,9 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4">
+				<div class="col">
 					<div class="card" style="width: 18rem;">
-						<img class="card-img-top" src="...">
+						<img class="card-img-top" src="{% static 'network/images/_DiazJ.png' %}">
 						<div class="card-body">
 							<h5 class="card-title">Card Title</h5>
 							<p class="card-text">Uhhh</p>
@@ -87,9 +88,19 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4">
+				<div class="col">
 					<div class="card" style="width: 18rem;">
-						<img class="card-img-top" src="...">
+						<img class="card-img-top" src="{% static 'network/images/_EspnG.JPG' %}">
+						<div class="card-body">
+							<h5 class="card-title">Card Title</h5>
+							<p class="card-text">Uhhh</p>
+							<a href="#" class="btn btn-primary">Read More</a>
+						</div>
+					</div>
+				</div>
+				<div class="col">
+					<div class="card" style="width: 18rem;">
+						<img class="card-img-top" src="{% static 'network/images/_MejiaB.png' %}">
 						<div class="card-body">
 							<h5 class="card-title">Card Title</h5>
 							<p class="card-text">Uhhh</p>
